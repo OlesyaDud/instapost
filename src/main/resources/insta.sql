@@ -11,7 +11,35 @@ insert into insta."user" (u_id , u_name ) values(7, 'user7');
 
 
 
-insert into insta.post (p_id, image_url, u_id ) values(4, 'https://www.pexels.com/photo/elephant-cub-kenya-savanna-66898/', 1);
+insert into insta.post (p_id, image_url, u_id ) values(6, 'https://upload.wikimedia.org/wikipedia/commons/3/3f/JPEG_example_flower.jpg', 1);
+insert into insta.post (p_id, image_url, u_id ) values(7, 'https://upload.wikimedia.org/wikipedia/en/3/3f/Oxalis_tetraphylla_flower.jpg', 1);
+
+insert into insta.post (p_id, image_url, u_id ) values(10, 'https://upload.wikimedia.org/wikipedia/en/3/3f/Oxalis_tetraphylla_flower.jpg', 1);
+
+insert into insta.post (p_id, image_url, u_id ) values(9, 'https://upload.wikimedia.org/wikipedia/en/3/3f/Oxalis_tetraphylla_flower.jpg', 1);
+
+insert into insta.post (p_id, image_url, u_id ) values(1, 'https://upload.wikimedia.org/wikipedia/en/3/3f/Oxalis_tetraphylla_flower.jpg', 1);
+
+insert into insta.post (p_id, image_url, u_id ) values(2, 'https://upload.wikimedia.org/wikipedia/en/3/3f/Oxalis_tetraphylla_flower.jpg', 1);
+
+insert into insta.post (p_id, image_url, u_id ) values(3, 'https://upload.wikimedia.org/wikipedia/en/3/3f/Oxalis_tetraphylla_flower.jpg', 1);
+
+delete from insta.post where p_id = 2;
+delete from insta.post where p_id = 3;
+delete from insta.post where p_id = 4;
+delete from insta.post where p_id = 5;
+delete from insta.post where p_id = 8;
+delete from insta.post where p_id = 10;
+delete from insta.post where p_id = 9;
+delete from insta.post where p_id = 6;
+delete from insta.post where p_id = 7;
+
+update insta.post 
+set image_url = 'https://upload.wikimedia.org/wikipedia/commons/3/3f/JPEG_example_flower.jpg'
+where p_id  = 4;
+
+
+
 
 --select * from insta."user" u 
 --join insta.post 

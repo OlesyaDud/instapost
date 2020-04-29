@@ -18,7 +18,7 @@ public class User implements Serializable {
 	@Column(nullable = false)
 	private String u_name;
 	
-	 @OneToMany(mappedBy = "user")
+	 @OneToMany
 	 private List<Post> posts;
 
 	public Long getU_id() {
