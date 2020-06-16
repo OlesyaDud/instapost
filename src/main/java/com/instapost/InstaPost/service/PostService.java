@@ -1,35 +1,58 @@
-package com.instapost.InstaPost.service;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.instapost.InstaPost.model.Post;
-import com.instapost.InstaPost.repository.PostRepo;
-
-@Service
-public class PostService {
-
-	@Autowired
-	PostRepo postRepo;
-
-// post
-
-
-	public Post savePost(Post post) {
-		return (Post) postRepo.save(post);
-	}
-
-	//	    get
-	public List<Post> getPosts() {
-		return (List<Post>) postRepo.findAll();
-	}
-
-	public Post getPostById(long id) {
-		return postRepo.findById(id).orElse(null);
-	}
-
-
-
-}
+//package com.instapost.InstaPost.service;
+//
+//import java.sql.SQLException;
+//import java.util.List;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Service;
+//
+//import com.instapost.InstaPost.model.Post;
+//import com.instapost.InstaPost.repository.PostRepo;
+//
+//@Service
+//public class PostService {
+//
+//	@Autowired
+//	PostRepo postRepo;
+//
+//	
+//    public Post addLoc(Post p) throws  SQLException  {
+//    	
+//    	if(p == null) {
+//    		throw new SQLException();
+//    	}
+//		p.setTitle(p.getTitle());
+//		
+//		Post result = postRepo.save(p);
+//		return result;
+//    	
+//    }
+//	
+////	GET
+//	public List<Post> getPost() {
+//		return(List<Post>) postRepo.findAll();
+//	}
+//	
+//	public Post findByPostById(long pId) {
+//		return postRepo.findById(pId).orElse(null);
+//	}
+//	
+//// DELETE
+//	public String deletePost(long pId) {
+//		postRepo.deleteById(pId);
+//		return "post removed! " + pId;
+//	}
+//	
+////	Update
+//	public Post updatePost(Post p) {
+//		Post existingP = postRepo.findById(p.getId()).orElse(null);
+//		existingP.setId(p.getId());
+//		return postRepo.save(existingP);
+//		
+//	}
+//	
+//
+//
+//
+//
+//}

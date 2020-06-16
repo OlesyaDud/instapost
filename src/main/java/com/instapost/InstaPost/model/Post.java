@@ -1,60 +1,80 @@
 package com.instapost.InstaPost.model;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
-public class Post {
+public class Post extends AuditModel  implements Serializable {
+
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Long p_id;
-
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="p_id")
+	private Long id;
+	
+//	@Column(name = "user_id")
+//    private Integer userId;
+	
+	@Column
 	private String imageUrl;
 
-	@Column(insertable = false, updatable = false)
-	private Long u_id;
+	@Column
+	@Size(max = 250)
+    private String description;
+	 
+    @Column
+    @Size(max = 100)
+    private String title;
 	
-
-	@ManyToOne
-	@JoinColumn(name = "u_id")
-	private User user;
-
-	@OneToMany
-	private List<Comment> commentsList;
+    @Column
+    @Lob
+    private String content;
+    
+	 @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)  //post has many to one relationship with user
+	 @JoinColumn(name = "user_id") //declares foreign key column 
+	 @OnDelete(action = OnDeleteAction.CASCADE)
+	 private User user;
 
 	public Post() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Post(Long p_id, String imageUrl, Long u_id, User user, List<Comment> commentsList) {
+	public Post(Long id, String imageUrl, @Size(max = 250) String description, @Size(max = 100) String title,
+			String content, User user) {
 		super();
-		this.p_id = p_id;
+		this.id = id;
 		this.imageUrl = imageUrl;
-		this.u_id = u_id;
+		this.description = description;
+		this.title = title;
+		this.content = content;
 		this.user = user;
-		this.commentsList = commentsList;
-	}
-
-	public Post(Long p_id, String imageUrl, Long u_id) {
-		super();
-		this.p_id = p_id;
-		this.imageUrl = imageUrl;
-		this.u_id = u_id;
 	}
 
 	@Override
 	public String toString() {
-		return "Post [p_id=" + p_id + ", imageUrl=" + imageUrl + ", u_id=" + u_id + "]";
+		return "Post [id=" + id + ", imageUrl=" + imageUrl + ", description=" + description + ", title=" + title
+				+ ", content=" + content + ", user=" + user + "]";
 	}
 
-	public Long getP_id() {
-		return p_id;
+	public Long getId() {
+		return id;
 	}
 
-	public void setP_id(Long p_id) {
-		this.p_id = p_id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getImageUrl() {
@@ -65,12 +85,28 @@ public class Post {
 		this.imageUrl = imageUrl;
 	}
 
-	public Long getU_id() {
-		return u_id;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setU_id(Long u_id) {
-		this.u_id = u_id;
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public User getUser() {
@@ -81,20 +117,10 @@ public class Post {
 		this.user = user;
 	}
 
-	public List<Comment> getCommentsList() {
-		return commentsList;
-	}
-
-	public void setCommentsList(List<Comment> commentsList) {
-		this.commentsList = commentsList;
-	}
-	
-	
-	
+	 
 
 
-	
-	
+
 
 }
 

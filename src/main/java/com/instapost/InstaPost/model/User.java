@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 public class User implements Serializable {
 	
@@ -13,56 +15,77 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long u_id;
+	@Column(name = "user_id")
+	private Long id;
 
 	@Column(nullable = false)
-	private String u_name;
+	private String uName;
 	
-	 @OneToMany
-	 private List<Post> posts;
-
-	public Long getU_id() {
-		return u_id;
-	}
-
-	public void setU_id(Long u_id) {
-		this.u_id = u_id;
-	}
-
-	public String getU_name() {
-		return u_name;
-	}
-
-	public void setU_name(String u_name) {
-		this.u_name = u_name;
-	}
-
-	public List<Post> getPosts() {
-		return posts;
-	}
-
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
-	}
+	@Column(nullable = false)
+	private String email;
+	
+	@Column(nullable = false)
+	private String password;
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(Long u_id, String u_name) {
+	public User(Long id, String uName, String email, String password) {
 		super();
-		this.u_id = u_id;
-		this.u_name = u_name;
+		this.id = id;
+		this.uName = uName;
+		this.email = email;
+		this.password = password;
 	}
 
 	@Override
 	public String toString() {
-		return "User [u_id=" + u_id + ", u_name=" + u_name + "]";
+		return "User [id=" + id + ", uName=" + uName + ", email=" + email + ", password=" + password + "]";
 	}
-	 
-	 
-	 
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getuName() {
+		return uName;
+	}
+
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+//	 @OneToMany(targetEntity = Post.class)
+//	 @JoinColumn(name="user_posts", referencedColumnName="user_id")
+//	 private List<Post> posts;
+//
+//	 @OneToMany(targetEntity = Comment.class)
+//	 @JoinColumn(name="user_comments", referencedColumnName="user_id")
+//	 private List<Comment> comments;
+
 	
 
+	 
 }
