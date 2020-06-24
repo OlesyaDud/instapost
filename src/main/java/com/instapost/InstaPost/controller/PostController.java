@@ -21,6 +21,7 @@ import com.instapost.InstaPost.exceptions.ResourceNotFoundException;
 import com.instapost.InstaPost.model.Post;
 import com.instapost.InstaPost.repository.PostRepo;
 //import com.instapost.InstaPost.service.PostService;
+import com.instapost.InstaPost.service.PostService;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -29,14 +30,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/post")
 public class PostController {
 
-//	@Autowired
-//	private PostService pServ;
+	@Autowired
+	private PostService pServ;
 	
-//	
-//public PostController(PostService pServ) {
-//		super();
-//		this.pServ = pServ;
-//	}
+
+public PostController(PostService pServ) {
+		super();
+		this.pServ = pServ;
+	}
 
 //	@PostMapping
 //	public Post saveLoc(@RequestBody Post p) throws SQLException {
@@ -51,10 +52,10 @@ public class PostController {
 //		return pServ.getPost();
 //	}
 	
-//	@GetMapping("/{pId}")
-//	public Post findProdById(@PathVariable long pId) {
-//		return pServ.findByPostById(pId);
-//	}
+	@GetMapping("/{pId}")
+	public Post findProdById(@PathVariable long pId) {
+		return pServ.findByPostById(pId);
+	}
 	
 //	put
 //	@PutMapping
@@ -73,8 +74,8 @@ public class PostController {
 	   private PostRepo postRepo;
 	  
 	  @GetMapping
-	    public Page<Post> getAllPosts(Pageable pageable) {
-	        return (Page<Post>) postRepo.findAll();
+	    public Iterable<Post> getAllPosts(Pageable pageable) {
+	        return postRepo.findAll();
 	    }
 	  
 	   @PostMapping
@@ -89,7 +90,6 @@ public class PostController {
 	        	
 	            post.setTitle(postRequest.getTitle());
 	            post.setDescription(postRequest.getDescription());
-	            post.setContent(postRequest.getContent());
 	            return postRepo.save(post);
 	        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + p_id + " not found"));
 	    }
