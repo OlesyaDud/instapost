@@ -1,9 +1,11 @@
 package com.instapost.InstaPost.model;
 
 import java.io.Serializable;
+
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.hibernate.annotations.Cascade;
 
@@ -18,13 +20,25 @@ public class User implements Serializable {
 	@Column(name = "user_id")
 	private Long id;
 
-	@Column(nullable = false)
+	@NotNull
+	@NotEmpty
+	@NotBlank
+	@Size(min = 2, max =14)
+	@Column(nullable = false, unique = true)
 	private String uName;
 	
-	@Column(nullable = false)
+	@NotNull
+	@NotEmpty
+	@NotBlank
+	@Size(min = 4, max = 20)
+	@Column(nullable = false, unique = true)
 	private String email;
 	
-	@Column(nullable = false)
+	@NotNull
+	@NotEmpty
+	@NotBlank
+	@Size(min = 4, max = 14)
+	@Column(name="password", nullable = false, unique = true)
 	private String password;
 
 	public User() {
