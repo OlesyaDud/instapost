@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.instapost.InstaPost.model.Comment;
@@ -15,6 +16,9 @@ public class UserService {
 
 	@Autowired
 	UserRepo userRepo;
+	
+//	  @Autowired
+//	  private PasswordEncoder passwordEncoder;
 	
 
 // post

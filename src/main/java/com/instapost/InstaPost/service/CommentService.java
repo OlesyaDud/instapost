@@ -48,7 +48,7 @@ public class CommentService {
 // delete 
 	public String deleteComment(long cId) {
 		commentRepo.deleteById(cId);
-		return "post removed! " + cId;
+		return null;
 	}
 	
 	

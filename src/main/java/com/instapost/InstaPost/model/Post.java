@@ -36,9 +36,8 @@ public class Post extends AuditModel {
 	
 
     
-	 @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)  //post has many to one relationship with user
-	 @JoinColumn(name = "user_id") //declares foreign key column 
-	 @OnDelete(action = OnDeleteAction.CASCADE)
+	 @ManyToOne(targetEntity = User.class, cascade= CascadeType.ALL, fetch = FetchType.LAZY)  
+	 @JoinColumn(name = "u_id") //declares foreign key column 
 	 private User user;
 
 	public Post() {

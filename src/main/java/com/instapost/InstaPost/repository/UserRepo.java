@@ -4,9 +4,10 @@ import org.springframework.stereotype.Repository;
 
 import com.instapost.InstaPost.model.User;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
-public interface UserRepo extends CrudRepository<User, Long> {
+public interface UserRepo extends JpaRepository<User, Long> {
+
 
 }

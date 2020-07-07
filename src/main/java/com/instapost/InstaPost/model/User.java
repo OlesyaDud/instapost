@@ -24,7 +24,7 @@ public class User implements Serializable {
 	@NotEmpty
 	@NotBlank
 	@Size(min = 2, max =14)
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String uName;
 	
 	@NotNull

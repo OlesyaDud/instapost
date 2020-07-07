@@ -14,6 +14,9 @@ import com.fasterxml.jackson.annotation.*;
 public class Comment extends AuditModel {
 	
 
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -22,28 +25,37 @@ public class Comment extends AuditModel {
     private String text;
     
 	
-	 @ManyToOne(targetEntity = Post.class, fetch = FetchType.LAZY)  //comment has many to one relationship with Post --1 post - many comments
+	 @ManyToOne(targetEntity = Post.class, cascade= CascadeType.ALL, fetch = FetchType.LAZY)  //comment has many to one relationship with Post --1 post - many comments
 	 @JoinColumn(name = "post_id") //declares foreign key column 
-	 @OnDelete(action = OnDeleteAction.CASCADE)
-	 @JsonProperty("post_id")
+//	 @OnDelete(action = OnDeleteAction.CASCADE)
 	 private Post post;
+	 
+	 @ManyToOne(targetEntity = User.class, cascade= CascadeType.ALL, fetch = FetchType.LAZY)  //comment has many to one relationship with Post --1 post - many comments
+	 @JoinColumn(name = "user_id") //declares foreign key column 
+	 private User user;
+	 
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Comment(Long id, @Length(min = 3, max = 250) String text, Post post, User user) {
+		super();
+		this.id = id;
+		this.text = text;
+		this.post = post;
+		this.user = user;
+	}
 
 	public Comment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Comment(Long id, @Length(min = 3, max = 250) String text, Post post) {
-		super();
-		this.id = id;
-		this.text = text;
-		this.post = post;
-	}
-
-	@Override
-	public String toString() {
-		return "Comment [id=" + id + ", text=" + text + ", post=" + post + "]";
-	}
 
 	public Long getId() {
 		return id;
@@ -67,6 +79,11 @@ public class Comment extends AuditModel {
 
 	public void setPost(Post post) {
 		this.post = post;
+	}
+
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", text=" + text + ", post=" + post + ", user=" + user + "]";
 	}
 
 
